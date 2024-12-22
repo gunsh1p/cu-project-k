@@ -81,6 +81,7 @@ async def interval_select(callback: CallbackQuery, state: FSMContext):
             data[city] = {k: v for k, v in weather['data'].items() if k.startswith("temperature")}
     except Exception:
         await callback.message.edit_text("Произошла ошибка при получении погоды, попробуйте ещё раз")
+        return
     text = 'Погода:\n'
 
     for i in range(interval):
@@ -107,6 +108,7 @@ async def interval_input(message: Message, state: FSMContext):
             data[city] = {k: v for k, v in weather['data'].items() if k.startswith("temperature")}
     except Exception:
         await message.edit_text("Произошла ошибка при получении погоды, попробуйте ещё раз")
+        return
     text = 'Погода:\n'
 
     for i in range(interval):
