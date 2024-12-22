@@ -3,6 +3,8 @@ import asyncio
 import logging
 
 from aiogram import Dispatcher, Bot
+from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 
 from handlers import start, weather
@@ -34,7 +36,7 @@ async def on_startup(bot: Bot):
     await bot.delete_webhook()
 
 async def main():
-    bot = Bot(token=config.TOKEN)
+    bot = Bot(token=config.TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     setup_logging()
     setup_routers(dp)

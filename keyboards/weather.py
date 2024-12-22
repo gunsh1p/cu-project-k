@@ -1,5 +1,7 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+import config
+
 SKIP_KEYBOARD = InlineKeyboardMarkup(
     inline_keyboard=[
         [
@@ -19,3 +21,13 @@ INTERVAL_KEYBOARD = InlineKeyboardMarkup(
     ]
 )
 
+def get_detailed_link(cities: list[str]) -> InlineKeyboardMarkup:
+    query_params = '&'.join(f"city={city}" for city in cities)
+    url = config.API_HOST + f"/details?{query_params}"
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text="Детальная информация", url=url)
+            ]
+        ]
+    )
